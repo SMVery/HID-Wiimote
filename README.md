@@ -1,3 +1,7 @@
+# Why fork
+
+To provide some consistency between plugging devices to Wiimote 
+
 # HID Wiimote - A Windows Device Driver for the Nintendo Wii Remote
 
 ⚠ This project and repository has been archived, as it hasn't been under any active development for a very long time ⚠
