@@ -1,6 +1,6 @@
 # Why fork
 
-To provide some consistency between plugging devices to Wiimote 
+To provide some consistency of inputs between plugging devices to Wiimote 
 
 # HID Wiimote - A Windows Device Driver for the Nintendo Wii Remote
 
