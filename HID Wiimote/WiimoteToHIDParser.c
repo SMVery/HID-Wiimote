@@ -1,6 +1,6 @@
 /*
 
-Copyright (C) 2017 Julian Löhr
+Copyright (C) 2017 Julian LÃ¶hr
 All rights reserved.
 
 Filename:
@@ -87,7 +87,7 @@ ParseAccelerometer(
 	_In_ BOOLEAN Invert
 )
 {
-	// Gravity is always present. 10 Bit Accelerometer data would have value of 96 (9,8 m/s²).
+	// Gravity is always present. 10 Bit Accelerometer data would have value of 96 (9,8 m/sÂ²).
 	// As only the 8 MSBs are used the value is 24. To caputure that constant pull a value range from 0 to 63 is used (32 = nullstate).
 	// For a range of 63 6 bits are used.
 
@@ -360,17 +360,35 @@ ParseWiimoteStateAsStandaloneWiiremote(
 )
 {
 	//Axis
-	ParseBooleanAxis(WiimoteState->WiiRemoteState.CoreButtons.DPad.Up, WiimoteState->WiiRemoteState.CoreButtons.DPad.Down, &GamepadReport->XAxis, FALSE);
-	ParseBooleanAxis(WiimoteState->WiiRemoteState.CoreButtons.DPad.Right, WiimoteState->WiiRemoteState.CoreButtons.DPad.Left, &GamepadReport->YAxis, FALSE);
+	//ParseBooleanAxis(WiimoteState->WiiRemoteState.CoreButtons.DPad.Up, WiimoteState->WiiRemoteState.CoreButtons.DPad.Down, &GamepadReport->XAxis, FALSE);
+	//ParseBooleanAxis(WiimoteState->WiiRemoteState.CoreButtons.DPad.Right, WiimoteState->WiiRemoteState.CoreButtons.DPad.Left, &GamepadReport->YAxis, FALSE);
+
+	//DPad
+	ParseDPad(
+		WiimoteState->WiiRemoteState.CoreButtons.DPad.Up,
+		WiimoteState->WiiRemoteState.CoreButtons.DPad.Right,
+		WiimoteState->WiiRemoteState.CoreButtons.DPad.Down,
+		WiimoteState->WiiRemoteState.CoreButtons.DPad.Left,
+		&GamepadReport->Hatswitch);
 
 	//Buttons
-	ParseButton(WiimoteState->WiiRemoteState.CoreButtons.One, &GamepadReport->Buttons[0], 0);
+	/*ParseButton(WiimoteState->WiiRemoteState.CoreButtons.One, &GamepadReport->Buttons[0], 0);
 	ParseButton(WiimoteState->WiiRemoteState.CoreButtons.Two, &GamepadReport->Buttons[0], 1);
 	ParseButton(WiimoteState->WiiRemoteState.CoreButtons.A, &GamepadReport->Buttons[0], 2);
 	ParseButton(WiimoteState->WiiRemoteState.CoreButtons.B, &GamepadReport->Buttons[0], 3);
 	ParseButton(WiimoteState->WiiRemoteState.CoreButtons.Plus, &GamepadReport->Buttons[0], 4);
 	ParseButton(WiimoteState->WiiRemoteState.CoreButtons.Minus, &GamepadReport->Buttons[0], 5);
-	ParseButton(WiimoteState->WiiRemoteState.CoreButtons.Home, &GamepadReport->Buttons[0], 6);
+	ParseButton(WiimoteState->WiiRemoteState.CoreButtons.Home, &GamepadReport->Buttons[0], 6);*/
+
+	ParseButton(WiimoteState->WiiRemoteState.CoreButtons.A, &GamepadReport->Buttons[0], 0);
+	ParseButton(WiimoteState->WiiRemoteState.CoreButtons.B, &GamepadReport->Buttons[0], 1);
+	//ParseButton(WiimoteState->NunchuckState.Buttons.C, &GamepadReport->Buttons[0], 2);
+	//ParseButton(WiimoteState->NunchuckState.Buttons.Z, &GamepadReport->Buttons[0], 3);
+	ParseButton(WiimoteState->WiiRemoteState.CoreButtons.One, &GamepadReport->Buttons[0], 4);
+	ParseButton(WiimoteState->WiiRemoteState.CoreButtons.Two, &GamepadReport->Buttons[0], 5);
+	ParseButton(WiimoteState->WiiRemoteState.CoreButtons.Plus, &GamepadReport->Buttons[0], 6);
+	ParseButton(WiimoteState->WiiRemoteState.CoreButtons.Minus, &GamepadReport->Buttons[0], 7);
+	ParseButton(WiimoteState->WiiRemoteState.CoreButtons.Home, &GamepadReport->Buttons[1], 0);
 
 	//Accelerometer
 	if(WiimoteSettings->EnableWiimoteXAxisAccelerometer)
